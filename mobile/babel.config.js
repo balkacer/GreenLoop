@@ -1,7 +1,5 @@
 module.exports = {
   presets: ['module:@react-native/babel-preset'],
-  plugins: [
-    'react-native-reanimated/plugin',
-    'react-native-worklets/plugin',
-  ],
+  // Reanimated 4's plugin is an alias to react-native-worklets/plugin; list only one.
+  plugins: ['react-native-reanimated/plugin'],
 };
