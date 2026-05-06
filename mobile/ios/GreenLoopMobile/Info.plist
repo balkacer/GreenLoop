@@ -28,18 +28,19 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>GreenLoop usa tu ubicación para mostrar contenedores cercanos y rutas.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Necesitamos la cámara para escanear el código QR del contenedor.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Usamos Face ID para iniciar sesión de forma segura.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GreenLoop usa tu ubicación para mostrar contenedores cercanos y rutas.</string>
+	<key>RCTNewArchEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
