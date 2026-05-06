@@ -7,6 +7,7 @@ export * from './ErrorState';
 export * from './LoadingState';
 export * from './LocationCard';
 export * from './PointsBadge';
+export * from './QuickActionTile';
 export * from './StatusBadge';
 export * from './TransactionItem';
 export * from './brand';

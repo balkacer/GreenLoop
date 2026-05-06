@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   AppButton,
   AppScreen,
@@ -19,20 +20,23 @@ import { useUiStore } from '../../../app/store/uiStore';
 const SLIDES = [
   {
     key: '1',
-    title: 'Bienvenido a GreenLoop',
-    body: 'Separa bien tu basura y gana GreenPoints en contenedores inteligentes repartidos en República Dominicana.',
+    title: 'Recicla tu material',
+    accent: 'material',
+    body: 'Separa bien tus envases y acércate a contenedores inteligentes para ganar GreenPoints en RD.',
     image: 'https://picsum.photos/seed/gl-onb1/400/280',
   },
   {
     key: '2',
-    title: 'GreenPoints',
-    body: 'Acumula puntos por cada depósito correcto y canjéalos en comercios aliados o dona a causas ambientales.',
+    title: 'Gana GreenPoints',
+    accent: 'GreenPoints',
+    body: 'Acumula puntos por depósitos correctos y canjéalos en aliados o dona a causas ambientales.',
     image: 'https://picsum.photos/seed/gl-onb2/400/280',
   },
   {
     key: '3',
-    title: 'Tu comunidad más limpia',
-    body: 'Invita amigos, participa en eventos y sigue el impacto desde una app simple y clara.',
+    title: 'Impacto en comunidad',
+    accent: 'comunidad',
+    body: 'Invita amigos, participa en eventos y mide tu impacto desde una app clara y amigable.',
     image: 'https://picsum.photos/seed/gl-onb3/400/280',
   },
 ];
@@ -46,28 +50,41 @@ export function OnboardingScreen() {
   const listRef = useRef<FlatList>(null);
 
   return (
-    <AppScreen>
-      <FlatList
-        ref={listRef}
-        data={SLIDES}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={item => item.key}
-        onMomentumScrollEnd={e => {
-          const i = Math.round(
-            e.nativeEvent.contentOffset.x / e.nativeEvent.layoutMeasurement.width,
-          );
-          setIndex(i);
-        }}
-        renderItem={({ item }) => (
-          <View style={[styles.slide, { width: SCREEN_W }]}>
-            <Image source={{ uri: item.image }} style={styles.img} />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.body}>{item.body}</Text>
-          </View>
-        )}
-      />
+    <AppScreen style={styles.screenBg}>
+      <LinearGradient
+        colors={[colors.limeWash, colors.mintSoft, colors.background]}
+        locations={[0, 0.45, 1]}
+        style={styles.gradient}>
+        <FlatList
+          ref={listRef}
+          data={SLIDES}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item.key}
+          onMomentumScrollEnd={e => {
+            const i = Math.round(
+              e.nativeEvent.contentOffset.x /
+                e.nativeEvent.layoutMeasurement.width,
+            );
+            setIndex(i);
+          }}
+          renderItem={({ item }) => {
+            const parts = item.title.split(item.accent);
+            return (
+              <View style={[styles.slide, { width: SCREEN_W }]}>
+                <Image source={{ uri: item.image }} style={styles.img} />
+                <Text style={styles.title}>
+                  {parts[0]}
+                  <Text style={styles.titleAccent}>{item.accent}</Text>
+                  {parts[1] ?? ''}
+                </Text>
+                <Text style={styles.body}>{item.body}</Text>
+              </View>
+            );
+          }}
+        />
+      </LinearGradient>
       <View style={styles.dots}>
         {SLIDES.map((_, i) => (
           <View
@@ -105,19 +122,23 @@ export function OnboardingScreen() {
 }
 
 const styles = StyleSheet.create({
+  screenBg: { backgroundColor: colors.background },
+  gradient: { flex: 1 },
   slide: { paddingHorizontal: spacing.md },
   img: {
     width: '100%',
     height: 200,
-    borderRadius: 16,
+    borderRadius: 20,
     marginBottom: spacing.lg,
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: '800',
     color: colors.text,
     marginBottom: spacing.sm,
+    lineHeight: 32,
   },
+  titleAccent: { color: colors.brandGreen },
   body: { fontSize: 16, lineHeight: 22, color: colors.textMuted },
   dots: {
     flexDirection: 'row',
@@ -131,6 +152,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: colors.border,
   },
-  dotActive: { backgroundColor: colors.primary },
+  dotActive: {
+    backgroundColor: colors.brandTeal,
+    width: 22,
+    borderRadius: 6,
+  },
   footer: { padding: spacing.md, gap: spacing.sm },
 });

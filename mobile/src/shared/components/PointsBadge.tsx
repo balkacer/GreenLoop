@@ -20,21 +20,23 @@ export function PointsBadge({ points, compact }: Props) {
 const styles = StyleSheet.create({
   wrap: {
     alignSelf: 'flex-start',
-    backgroundColor: colors.accent + '44',
+    backgroundColor: colors.limeWash,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: 999,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
   },
   compact: { paddingHorizontal: spacing.sm, paddingVertical: spacing.xs },
   label: {
     fontSize: 11,
     fontWeight: '600',
-    color: colors.primaryDark,
+    color: colors.brandTeal,
     textTransform: 'uppercase',
   },
   value: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '800',
-    color: colors.primary,
+    color: colors.brandGreen,
   },
 });

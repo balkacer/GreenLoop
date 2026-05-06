@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { Text } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Home, MapPin, Sparkles, User } from 'lucide-react-native';
 import { colors } from '../../shared/theme/colors';
 import { DashboardScreen } from '../../features/dashboard/screens/DashboardScreen';
 import { MapScreen } from '../../features/containers/screens/MapScreen';
@@ -21,41 +22,74 @@ export function MainTabs() {
     <Tab.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
-        tabBarActiveTintColor: colors.primary,
+        headerStyle: {
+          backgroundColor: colors.surface,
+        },
+        headerTintColor: colors.text,
+        headerShadowVisible: false,
+        tabBarActiveTintColor: colors.brandTeal,
         tabBarInactiveTintColor: colors.textMuted,
+        tabBarStyle: styles.tabBar,
+        tabBarLabelStyle: styles.tabLabel,
       }}>
       <Tab.Screen
         name="Inicio"
         component={DashboardScreen}
         options={{
-          tabBarIcon: () => <TabIcon label="🏠" />,
+          title: 'Inicio',
+          tabBarIcon: ({ color, size }) => (
+            <Home color={color} size={size ?? 22} strokeWidth={2.25} />
+          ),
         }}
       />
       <Tab.Screen
         name="Mapa"
         component={MapScreen}
         options={{
-          tabBarIcon: () => <TabIcon label="📍" />,
+          title: 'Mapa',
+          tabBarIcon: ({ color, size }) => (
+            <MapPin color={color} size={(size ?? 22) + 1} strokeWidth={2.25} />
+          ),
         }}
       />
       <Tab.Screen
         name="Puntos"
         component={PointsScreen}
         options={{
-          tabBarIcon: () => <TabIcon label="⭐" />,
+          title: 'Puntos',
+          tabBarIcon: ({ color, size }) => (
+            <Sparkles color={color} size={size ?? 22} strokeWidth={2.25} />
+          ),
         }}
       />
       <Tab.Screen
         name="Perfil"
         component={ProfileScreen}
         options={{
-          tabBarIcon: () => <TabIcon label="👤" />,
+          title: 'Perfil',
+          tabBarIcon: ({ color, size }) => (
+            <User color={color} size={size ?? 22} strokeWidth={2.25} />
+          ),
         }}
       />
     </Tab.Navigator>
   );
 }
 
-function TabIcon({ label }: { label: string }) {
-  return <Text style={{ fontSize: 20 }}>{label}</Text>;
-}
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: colors.surface,
+    borderTopColor: colors.borderLight,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingTop: 4,
+    elevation: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: -2 },
+  },
+  tabLabel: {
+    fontSize: 11,
+    fontWeight: '600',
+  },
+});
