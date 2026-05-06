@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build / cache
+dist/
+build/
+*.tsbuildinfo
+coverage/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+
+# Signing / keystores (release); RN keeps debug.keystore via mobile/.gitignore rules
+*.jks
+*.p12
+*.pem
+
+# Android local SDK path (also listed under mobile/)
+**/local.properties

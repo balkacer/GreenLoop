@@ -1,0 +1,11 @@
+{
+  "name": "greenloop",
+  "private": true,
+  "scripts": {
+    "backend": "npm --prefix backend run dev",
+    "backend:build": "npm --prefix backend run build",
+    "mobile": "npm --prefix mobile start",
+    "mobile:android": "npm --prefix mobile run android",
+    "mobile:ios": "npm --prefix mobile run ios"
+  }
+}
